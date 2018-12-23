@@ -1,5 +1,6 @@
 
 var vader = {
+  name: "vader",
   hp: 200,
   attack: 20,
   isChosen: false,
@@ -7,6 +8,7 @@ var vader = {
 }
 
 var kylo = {
+  name: "kylo",
   hp: 200,
   attack: 20,
   isChosen: false,
@@ -14,6 +16,7 @@ var kylo = {
 }
 
 var luke = {
+  name: "luke",
   hp: 200,
   attack: 20,
   isChosen: false,
@@ -21,6 +24,7 @@ var luke = {
 }
 
 var chewbacca = {
+  name: "chewbacca",
   hp: 200,
   attack: 20,
   isChosen: false,
@@ -30,6 +34,25 @@ var chewbacca = {
 var character = [vader,kylo,luke,chewbacca];
 var strike;
 var defender;
+
+function reset(){
+  $(".characterList").show();
+  $(".available-character").hide();
+  $(".defender-character").hide();
+  $(".chosen-character").hide();
+  $( ".title3" ).show();
+  $( ".title3" ).show();
+  for( var i = 0; i < character.length; i++){
+    character[i].isChosen = false; 
+    character[i].isDefender = false; 
+    character[i].attack = 0;
+    character[i].strike = 0;
+    character[i].hp = 0;
+    $(".load").text(0);
+  }
+}
+
+
   
   // Select player
   $(".available-character").hide();
@@ -39,6 +62,7 @@ var defender;
   // Move list to chosen and select enemie
   $( "#list1" ).on( "click", function() {
     $(".chosen-character").show();
+    $( ".title1" ).hide();
     $( "#chose1" ).show();
     $( "#chose2" ).hide();
     $( "#chose3" ).hide();
@@ -59,6 +83,7 @@ var defender;
 
     $( "#list2" ).on( "click", function() {
       $(".chosen-character").show();
+      $( ".title1" ).hide();
       $( "#chose2" ).show();
       $( "#chose1" ).hide();
       $( "#chose3" ).hide();
@@ -79,6 +104,7 @@ var defender;
 
     $( "#list3" ).on( "click", function() {
       $(".chosen-character").show();
+      $( ".title1" ).hide();
       $( "#chose3" ).show();
       $( "#chose1" ).hide();
       $( "#chose2" ).hide();
@@ -99,6 +125,7 @@ var defender;
 
     $( "#list4" ).on( "click", function() {
       $(".chosen-character").show();
+      $( ".title1" ).hide();
       $( "#chose4" ).show();
       $( "#chose1" ).hide();
       $( "#chose3" ).hide();
@@ -120,6 +147,7 @@ var defender;
     // Select Attack player
     $( "#avai1" ).on( "click", function() {
       $(".defender-character").show();
+      $( ".title3" ).hide();
       $("#attack1").show();
       $( "#attack2" ).hide();
       $( "#attack3" ).hide();
@@ -136,6 +164,7 @@ var defender;
 
     $( "#avai2" ).on( "click", function() {
       $(".defender-character").show();
+      $( ".title3" ).hide();
       $("#attack2").show();
       $( "#attack1" ).hide();
       $( "#attack3" ).hide();
@@ -152,6 +181,7 @@ var defender;
 
     $( "#avai3" ).on( "click", function() {
       $(".defender-character").show();
+      $( ".title3" ).hide();
       $("#attack3").show();
       $( "#attack1" ).hide();
       $( "#attack2" ).hide();
@@ -168,6 +198,7 @@ var defender;
 
     $( "#avai4" ).on( "click", function() {
       $(".defender-character").show();
+      $( ".title3" ).hide();
       $("#attack4").show();
       $( "#attack2" ).hide();
       $( "#attack3" ).hide();
@@ -191,16 +222,15 @@ var defender;
         $(".hpa").text(strike.hp);        
         }
         else {
-          alert("You win");
+          alert("You kill " + defender.name + " Chose another character" );
           $('.available-character').show();
-          
+          $( ".title3" ).show();
         }
 
         if ( strike.hp < 0){
           alert("You lose")
+          reset();
         }
-
-
       });
   
 
