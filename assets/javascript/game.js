@@ -35,6 +35,8 @@ var character = [vader,kylo,luke,chewbacca];
 var strike;
 var defender;
 
+var characterDefeated = 0;
+
 function reset(){
   $(".characterList").show();
   $(".available-character").hide();
@@ -49,6 +51,7 @@ function reset(){
     character[i].strike = 0;
     character[i].hp = 0;
     $(".load").text(0);
+    characterDefeated = 0;
   }
 }
 
@@ -215,23 +218,28 @@ function reset(){
 
     // button Attack
       $( ".attack" ).on( "click", function() {
-        if(defender.hp > 0){
-        defender.hp = defender.hp - strike.attack;
-        $(".hpd").text(defender.hp);
-        strike.hp = strike.hp - defender.attack;
-        $(".hpa").text(strike.hp);        
-        }
-        else {
-          alert("You kill " + defender.name + " Chose another character" );
-          $('.available-character').show();
-          $( ".title3" ).show();
-        }
+          if(defender.hp > 0){
+            defender.hp = defender.hp - strike.attack;
+            $(".hpd").text(defender.hp);
+            strike.hp = strike.hp - defender.attack;
+            $(".hpa").text(strike.hp);        
+            }
+            else {
+              alert("You kill " + defender.name + " Chose another character" );
+              $('.available-character').show();
+              $( ".title3" ).show();
+              characterDefeated++;
+            }
+    
+            if ( strike.hp < 0){
+              alert("Game Over")
+              reset();
+            }
 
-        if ( strike.hp < 0){
-          alert("You lose")
-          reset();
-        }
+            if ( characterDefeated >= 3 ){
+              alert('Congratulation You Kill all of them');
+              reset();
+            }
       });
-  
-
+      
 
