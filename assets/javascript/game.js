@@ -34,16 +34,12 @@ var chewbacca = {
 var character = [vader,kylo,luke,chewbacca];
 var strike;
 var defender;
-
 var characterDefeated = 0;
 
+// Reset Game
 function reset(){
-  $(".characterList").show();
-  $(".available-character").hide();
-  $(".defender-character").hide();
-  $(".chosen-character").hide();
-  $( ".title3" ).show();
-  $( ".title3" ).show();
+  $(".characterList,.title3 ").show();
+  $(".available-character,.defender-character,.chosen-character").hide();
   for( var i = 0; i < character.length; i++){
     character[i].isChosen = false; 
     character[i].isDefender = false; 
@@ -53,193 +49,127 @@ function reset(){
     characterDefeated = 0;
   }
 }
+// Hide all list of character
+$(".available-character, .defender-character, .chosen-character").hide();
 
+// Move list to chosen and select your ennemies
+//Vader
+$( "#list1" ).on( "click", function() {
+  $(".chosen-character, .available-character,#chose1, #avai2, #avai3, #avai4").show();
+  $( ".title1, #chose2, #chose3, #chose4, #avai1, .characterList" ).hide();
+  vader.isChosen = true;
+  vader.hp = Math.floor(Math.random() * 100 + 100);
+  $(".hp1").text(vader.hp);
+  vader.attack = Math.floor(Math.random() * 5 + 10);
+  $(".at1").text(vader.attack);
+  strike = vader;
+});
 
-  
-  // Select player
-  $(".available-character").hide();
-  $(".defender-character").hide();
-  $(".chosen-character").hide();
+//kylo
+$( "#list2" ).on( "click", function() {
+  $(".chosen-character,#chose2,.available-character, #avai1, #avai3, #avai4 ").show();
+  $( ".title1, #chose1, #chose3, #chose4, #avai2, .characterList" ).hide();
+  kylo.isChosen = true;
+  kylo.hp = Math.floor(Math.random() * 100 + 100);
+  $(".hp2").text(kylo.hp);
+  kylo.attack = Math.floor(Math.random() * 5 + 10);
+  $(".at2").text(kylo.attack);
+  strike = kylo;
+});
 
-  // Move list to chosen and select enemie
-  $( "#list1" ).on( "click", function() {
-    $(".chosen-character").show();
-    $( ".title1" ).hide();
-    $( "#chose1" ).show();
-    $( "#chose2" ).hide();
-    $( "#chose3" ).hide();
-    $( "#chose4" ).hide();
-    $(".available-character").show();
-    $("#avai1").hide();
-    $("#avai2").show();
-    $("#avai3").show();
-    $("#avai4").show();
-    $('.characterList').hide();
-    vader.isChosen = true;
-    vader.hp = Math.floor(Math.random() * 100 + 100);
-    $(".hp1").text(vader.hp);
-    vader.attack = Math.floor(Math.random() * 5 + 10);
-    $(".at1").text(vader.attack);
-    strike = vader;
-    });
+//Luke
+$( "#list3" ).on( "click", function() {
+  $(".chosen-character,#chose3, .available-character, #avai2,#avai1,#avai4 ").show();
+  $( ".title1,#chose1,#chose2,#chose4,#avai3,.characterList ").hide();
+  luke.isChosen = true;
+  luke.hp = Math.floor(Math.random() * 100 + 100);
+  $(".hp3").text(luke.hp);
+  luke.attack = Math.floor(Math.random() * 5 + 10);
+  $(".at3").text(luke.attack);
+  strike = luke;
+});
 
-    $( "#list2" ).on( "click", function() {
-      $(".chosen-character").show();
-      $( ".title1" ).hide();
-      $( "#chose2" ).show();
-      $( "#chose1" ).hide();
-      $( "#chose3" ).hide();
-      $( "#chose4" ).hide();
-      $(".available-character").show();
-      $("#avai2").hide();
-      $("#avai1").show();
-      $("#avai3").show();
-      $("#avai4").show();
-      $('.characterList').hide();
-      kylo.isChosen = true;
-      kylo.hp = Math.floor(Math.random() * 100 + 100);
-      $(".hp2").text(kylo.hp);
-      kylo.attack = Math.floor(Math.random() * 5 + 10);
-      $(".at2").text(kylo.attack);
-      strike = kylo;
-    });
+//Chewbacca
+$( "#list4" ).on( "click", function() {
+  $(".chosen-character,#chose4,.available-character,#avai2,#avai1,#avai3 ").show();
+  $( ".title1,#chose1,#chose3,#chose2,#avai4,.characterList" ).hide();
+  chewbacca.isChosen = true;
+  chewbacca.hp = Math.floor(Math.random() * 100 + 100);
+  $(".hp4").text(chewbacca.hp);
+  chewbacca.attack = Math.floor(Math.random() * 5 + 10);
+  $(".at4").text(chewbacca.attack);
+  strike = chewbacca;
+});
 
-    $( "#list3" ).on( "click", function() {
-      $(".chosen-character").show();
-      $( ".title1" ).hide();
-      $( "#chose3" ).show();
-      $( "#chose1" ).hide();
-      $( "#chose2" ).hide();
-      $( "#chose4" ).hide();
-      $(".available-character").show();
-      $("#avai3").hide();
-      $("#avai2").show();
-      $("#avai1").show();
-      $("#avai4").show();
-      $('.characterList').hide();
-      luke.isChosen = true;
-      luke.hp = Math.floor(Math.random() * 100 + 100);
-      $(".hp3").text(luke.hp);
-      luke.attack = Math.floor(Math.random() * 5 + 10);
-      $(".at3").text(luke.attack);
-      strike = luke;
-    });
+// Select Attack player
+$( "#avai1" ).on( "click", function() {
+  $(".defender-character,#attack1").show();
+  $( ".title3,#attack2,#attack3,#attack4,#avai1,.available-character" ).hide();
+  vader.isDefender = true;
+  vader.hp = Math.floor(Math.random() * 100 + 100);
+  $(".hp1").text(vader.hp);
+  vader.attack = Math.floor(Math.random() * 5 + 10);
+  $(".at1").text(vader.attack);
+  defender = vader;
+});
 
-    $( "#list4" ).on( "click", function() {
-      $(".chosen-character").show();
-      $( ".title1" ).hide();
-      $( "#chose4" ).show();
-      $( "#chose1" ).hide();
-      $( "#chose3" ).hide();
-      $( "#chose2" ).hide();
-      $(".available-character").show();
-      $("#avai4").hide();
-      $("#avai2").show();
-      $("#avai1").show();
-      $("#avai3").show();
-      $('.characterList').hide();
-      chewbacca.isChosen = true;
-      chewbacca.hp = Math.floor(Math.random() * 100 + 100);
-      $(".hp4").text(chewbacca.hp);
-      chewbacca.attack = Math.floor(Math.random() * 5 + 10);
-      $(".at4").text(chewbacca.attack);
-      strike = chewbacca;
-    });
+$( "#avai2" ).on( "click", function() {
+  $(".defender-character,#attack2").show();
+  $( ".title3,#attack1,#attack3,#attack4,#avai2,.available-character" ).hide();
+  kylo.isDefender = true;
+  kylo.hp = Math.floor(Math.random() * 100 + 100);
+  $(".hp2").text(kylo.hp);
+  kylo.attack = Math.floor(Math.random() * 5 + 10);
+  $(".at2").text(kylo.attack);
+  defender = kylo;
+});
 
-    // Select Attack player
-    $( "#avai1" ).on( "click", function() {
-      $(".defender-character").show();
-      $( ".title3" ).hide();
-      $("#attack1").show();
-      $( "#attack2" ).hide();
-      $( "#attack3" ).hide();
-      $( "#attack4" ).hide();
-      $( "#avai1" ).hide();
-      $('.available-character').hide();
-      vader.isDefender = true;
-      vader.hp = Math.floor(Math.random() * 100 + 100);
-      $(".hp1").text(vader.hp);
-      vader.attack = Math.floor(Math.random() * 5 + 10);
-      $(".at1").text(vader.attack);
-      defender = vader;
-    });
+$( "#avai3" ).on( "click", function() {
+  $(".defender-character,#attack3").show();
+  $( ".title3,#attack1,#attack2,#attack4,#avai3,.available-character" ).hide();
+  luke.isDefender = true;
+  luke.hp = Math.floor(Math.random() * 100 + 100);
+  $(".hp3").text(luke.hp);
+  luke.attack = Math.floor(Math.random() * 5 + 10);
+  $(".at3").text(luke.attack);
+  defender = luke;  
+});
 
-    $( "#avai2" ).on( "click", function() {
-      $(".defender-character").show();
-      $( ".title3" ).hide();
-      $("#attack2").show();
-      $( "#attack1" ).hide();
-      $( "#attack3" ).hide();
-      $( "#attack4" ).hide();
-      $( "#avai2" ).hide();
-      $('.available-character').hide();
-      kylo.isDefender = true;
-      kylo.hp = Math.floor(Math.random() * 100 + 100);
-      $(".hp2").text(kylo.hp);
-      kylo.attack = Math.floor(Math.random() * 5 + 10);
-      $(".at2").text(kylo.attack);
-      defender = kylo;
-    });
+$( "#avai4" ).on( "click", function() {
+  $(".defender-character,#attack4").show();
+  $( ".title3,#attack1,#attack2,#attack3,#avai4,.available-character" ).hide();
+  chewbacca.isDefender = true;
+  chewbacca.hp = Math.floor(Math.random() * 100 + 100);
+  $(".hp4").text(chewbacca.hp);
+  chewbacca.attack = Math.floor(Math.random() * 5 + 10);
+  $(".at4").text(chewbacca.attack);
+  defender = chewbacca;
+});
 
-    $( "#avai3" ).on( "click", function() {
-      $(".defender-character").show();
-      $( ".title3" ).hide();
-      $("#attack3").show();
-      $( "#attack1" ).hide();
-      $( "#attack2" ).hide();
-      $( "#attack4" ).hide();
-      $( "#avai3" ).hide();
-      $('.available-character').hide();
-      luke.isDefender = true;
-      luke.hp = Math.floor(Math.random() * 100 + 100);
-      $(".hp3").text(luke.hp);
-      luke.attack = Math.floor(Math.random() * 5 + 10);
-      $(".at3").text(luke.attack);
-      defender = luke;  
-    });
+// button Attack
+  $( ".attack" ).on( "click", function() {
+    if(defender.hp >= 0 & defender.isDefender == true){
+      defender.hp = defender.hp - strike.attack;
+      $(".hpd").text(defender.hp);
+      strike.hp = strike.hp - defender.attack;
+      $(".hpa").text(strike.hp);       
+    }
+    else if (defender.hp <= 0 & defender.isDefender == true) {
+      defender.isDefender = false;
+      alert("You kill " + defender.name + " Chose another character" );
+      $('.available-character, .title3').show();
+      characterDefeated++;
+    }
 
-    $( "#avai4" ).on( "click", function() {
-      $(".defender-character").show();
-      $( ".title3" ).hide();
-      $("#attack4").show();
-      $( "#attack2" ).hide();
-      $( "#attack3" ).hide();
-      $( "#attack1" ).hide();
-      $( "#avai4" ).hide();
-      $('.available-character').hide();
-      chewbacca.isDefender = true;
-      chewbacca.hp = Math.floor(Math.random() * 100 + 100);
-      $(".hp4").text(chewbacca.hp);
-      chewbacca.attack = Math.floor(Math.random() * 5 + 10);
-      $(".at4").text(chewbacca.attack);
-      defender = chewbacca;
-    });
+    if ( strike.hp < 0){
+      alert("Game Over");
+      reset();
+    }
 
-    // button Attack
-      $( ".attack" ).on( "click", function() {
-          if(defender.hp >= 0 & defender.isDefender == true){
-            defender.hp = defender.hp - strike.attack;
-            $(".hpd").text(defender.hp);
-            strike.hp = strike.hp - defender.attack;
-            $(".hpa").text(strike.hp);       
-            }
-            else if (defender.hp <= 0 & defender.isDefender == true) {
-              defender.isDefender = false;
-              alert("You kill " + defender.name + " Chose another character" );
-              $('.available-character').show();
-              $( ".title3" ).show();
-              characterDefeated++;
-            }
-
-            if ( strike.hp < 0){
-              alert("Game Over");
-              reset();
-            }
-
-            if ( characterDefeated >= 3 ){
-              alert('Congratulation You Kill all of them');
-              reset();
-            }
-      });
+    if ( characterDefeated >= 3 ){
+      alert('Congratulation You Kill all of them');
+      reset();
+    }
+  });
       
 
