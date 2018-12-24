@@ -4,7 +4,7 @@ var vader = {
   hp: 200,
   attack: 20,
   isChosen: false,
-  isDefender: false
+  isDefender: false,
 }
 
 var kylo = {
@@ -12,7 +12,7 @@ var kylo = {
   hp: 200,
   attack: 20,
   isChosen: false,
-  isDefender: false
+  isDefender: false,
 }
 
 var luke = {
@@ -20,7 +20,7 @@ var luke = {
   hp: 200,
   attack: 20,
   isChosen: false,
-  isDefender: false
+  isDefender: false,
 }
 
 var chewbacca = {
@@ -28,7 +28,7 @@ var chewbacca = {
   hp: 200,
   attack: 20,
   isChosen: false,
-  isDefender: false
+  isDefender: false,
 }
 
 var character = [vader,kylo,luke,chewbacca];
@@ -48,7 +48,6 @@ function reset(){
     character[i].isChosen = false; 
     character[i].isDefender = false; 
     character[i].attack = 0;
-    character[i].strike = 0;
     character[i].hp = 0;
     $(".load").text(0);
     characterDefeated = 0;
@@ -196,7 +195,7 @@ function reset(){
       $(".hp3").text(luke.hp);
       luke.attack = Math.floor(Math.random() * 5 + 10);
       $(".at3").text(luke.attack);
-      defender = luke;
+      defender = luke;  
     });
 
     $( "#avai4" ).on( "click", function() {
@@ -218,21 +217,22 @@ function reset(){
 
     // button Attack
       $( ".attack" ).on( "click", function() {
-          if(defender.hp > 0){
+          if(defender.hp >= 0 & defender.isDefender == true){
             defender.hp = defender.hp - strike.attack;
             $(".hpd").text(defender.hp);
             strike.hp = strike.hp - defender.attack;
-            $(".hpa").text(strike.hp);        
+            $(".hpa").text(strike.hp);       
             }
-            else {
+            else if (defender.hp <= 0 & defender.isDefender == true) {
+              defender.isDefender = false;
               alert("You kill " + defender.name + " Chose another character" );
               $('.available-character').show();
               $( ".title3" ).show();
               characterDefeated++;
             }
-    
+
             if ( strike.hp < 0){
-              alert("Game Over")
+              alert("Game Over");
               reset();
             }
 
